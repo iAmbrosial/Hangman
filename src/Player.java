@@ -10,9 +10,9 @@ public class Player implements Serializable {
 
     // instance variables
     private String username;
-    private String name;
-    private String email;
     private String password;
+    private int highScore;
+    private final List<Integer> scoreHistory = new ArrayList<>();
 
     /**
      * Constructor(s)
@@ -23,22 +23,14 @@ public class Player implements Serializable {
     }
 
     // do not set up the accounts here yet
-    public Player(String username, String name, String email, String password) {
+    public Player(String username, String password) {
         if (username == null || username.isBlank()) {
             throw new IllegalArgumentException("A username is required.");
-        }
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("A name is required.");
-        }
-        if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("An email is required.");
         }
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("A password is required,");
         }
         this.username = username;
-        this.name = name;
-        this.email = email;
         this.password = password;
     }
 
@@ -54,28 +46,6 @@ public class Player implements Serializable {
             throw new IllegalArgumentException("New username cannot be blank.");
         }
         this.username = newUsername;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String newName) {
-        if (newName == null || newName.isBlank()) {
-            throw new IllegalArgumentException("New name cannot be blank.");
-        }
-        this.name = newName;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String newEmail) {
-        if (newEmail == null || newEmail.isBlank()) {
-            throw new IllegalArgumentException("New email cannot be blank.");
-        }
-        this.email = newEmail;
     }
 
     protected String getPassword() {
@@ -105,12 +75,27 @@ public class Player implements Serializable {
         return obfuscatedPassword;
     }
 
+    public void addScore(int score) {
+        this.scoreHistory.add(score);
+        if (score > this.highScore) {
+            this.highScore = score;
+        }
+    }
+
+    public int getHighScore() {
+        return this.highScore;
+    }
+
+    public List<Integer> getScoreHistory() {
+        return Collections.unmodifiableList(this.scoreHistory);
+    }
+
     /**
      * Output/format player info
      */
     @Override
     public String toString() {
-        return String.format("Username: %s\nName: %s\nEmail: %s\nObfuscated Password: %s\nDefault Account: %s",
-                getUsername(), getName(), getEmail(), getObfuscatedPassword(), getDefaultAccount().getAccountNum());
+        return String.format("Username: %s\nName: %s\nObfuscated Password: %s",
+                getUsername(), getName(), getObfuscatedPassword());
     }
 }
