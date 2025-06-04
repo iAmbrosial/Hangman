@@ -95,7 +95,7 @@ public class Player implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("Username: %s\nName: %s\nObfuscated Password: %s",
-                getUsername(), getName(), getObfuscatedPassword());
+        return String.format("Username: %s\nHighscore: %d\nObfuscated Password: %s",
+                getUsername(), getHighScore(), getObfuscatedPassword());
     }
 }
