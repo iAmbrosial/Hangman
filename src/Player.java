@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player implements Serializable {
     @Serial
@@ -11,7 +13,8 @@ public class Player implements Serializable {
     // instance variables
     private String username;
     private String password;
-    private int highScore;
+    private int overallHighScore;
+    private final Map<String, Integer> highScoreMap = new HashMap<>();
     private final List<Integer> scoreHistory = new ArrayList<>();
 
     /**
@@ -75,19 +78,25 @@ public class Player implements Serializable {
         return obfuscatedPassword;
     }
 
-    public void addScore(int score) {
+    public void recordScore(String difficulty, int score) {
+        // Add raw score to history
         this.scoreHistory.add(score);
-        if (score > this.highScore) {
-            this.highScore = score;
-        }
+        // Update high score for the difficulty specified
+        this.highScoreMap.merge(difficulty, score, Math::max);
+        // Update overall high score
+        this.overallHighScore = Math.max(overallHighScore, score);
     }
 
-    public int getHighScore() {
-        return this.highScore;
+    public int getHighScore(String difficulty) {
+        return this.highScoreMap.getOrDefault(difficulty, 0);
+    }
+
+    public int getOverallHighScore() {
+        return this.overallHighScore;
     }
 
     public List<Integer> getScoreHistory() {
-        return Collections.unmodifiableList(this.scoreHistory);
+        return Collections.unmodifiableList(scoreHistory);
     }
 
     /**
@@ -95,7 +104,7 @@ public class Player implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("Username: %s\nHighscore: %d\nObfuscated Password: %s",
-                getUsername(), getHighScore(), getObfuscatedPassword());
+        return String.format("Username: %s\nOverall Highscore: %d\nObfuscated Password: %s",
+                getUsername(), getOverallHighScore(), getObfuscatedPassword());
     }
 }

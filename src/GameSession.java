@@ -19,8 +19,8 @@ public class GameSession {
      */
     public boolean guess(char c) {
         c = Character.toUpperCase(c);
-        if (guessedChar.contains(c)) {
-            return false; // character already guessed
+        if (!Character.isLetter(c) || guessedChar.contains(c)) {
+            return false; // character already guessed or isn't an alphabetic character
         }
         guessedChar.add(c);
         if (!targetWord.contains(Character.toString(c))) {
@@ -72,6 +72,10 @@ public class GameSession {
 
     public int getRemainingGuesses() {
         return MAX_GUESSES - this.wrongGuesses;
+    }
+
+    public boolean hasGuessed(char c) {
+        return guessedChar.contains(Character.toUpperCase(c));
     }
 }
 

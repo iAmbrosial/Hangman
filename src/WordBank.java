@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,12 +13,13 @@ public class WordBank {
     private final Random rand = new Random();
 
     /**
-     * @param filePath path to the word list file (e.g., "words.txt")
+     * @param difficulty corresponding to the difficulty of the level
      * @throws IOException if the file cannot be read or contains no valid words
      */
-    public WordBank(String filePath) throws IOException {
+    public WordBank(String difficulty) throws IOException {
+        String filename = String.format("words_%s.txt", difficulty.toLowerCase());
         // wraps a filereader (that reads characters from filepath) in a buffered reader to allow reading of each line at a time
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             // each call of reader.readLine() returns the next line of text
             while ((line = reader.readLine()) != null) {
@@ -27,7 +30,7 @@ public class WordBank {
             }
         }
         if (words.isEmpty()) {
-            throw new IOException("Word list is empty or not found: " + filePath);
+            throw new IOException("Word list is empty or not found: " + filename);
         }
     }
 

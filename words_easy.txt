@@ -1,0 +1,17 @@
+cat
+dog
+sun
+book
+tree
+fish
+bird
+cake
+ball
+milk
+shoe
+door
+rain
+star
+cake
+boat
+cake
