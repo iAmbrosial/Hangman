@@ -10,9 +10,7 @@ public class Hangman {
     // sets the viewing panel for the game
     private final HangmanGUI view;
     // Define available difficulties in a mutable list
-    private final List<String> difficulties = new ArrayList<>(
-            Arrays.asList("Easy", "Medium", "Hard")
-    );
+    private final List<String> difficulties = new ArrayList<>(Arrays.asList("Easy", "Medium", "Hard"));
 
     /**
      * @param view frame that the all Hangman functions will be accessed
@@ -133,4 +131,9 @@ public class Hangman {
     public List<Integer> getHistory() {
         return currentPlayer.getScoreHistory();
     }
+
+    /**
+     * things to add: overall leaderboard between players, showing the word when the game is failed,
+     * different word categories/difficulty algorithm, changing username/password
+     */
 }

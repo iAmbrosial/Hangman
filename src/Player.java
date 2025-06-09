@@ -95,15 +95,17 @@ public class Player implements Serializable {
         return this.highScoreMap.getOrDefault(difficulty, 0);
     }
 
+    // currently unused, to be used in leaderboard implementation
     public int getOverallHighScore() {
         return this.overallHighScore;
     }
 
+    // returns the entire score history of the player
     public List<Integer> getScoreHistory() {
         return Collections.unmodifiableList(scoreHistory);
     }
 
-    // currently unused due to GUI taking a while
+    // currently unused due to GUI taking a while to code
     /**
      * Output/format player info
      */

@@ -188,7 +188,7 @@ public class HangmanGUI extends JFrame {
         // returns a score history from the game controller
         List<Integer> history = controller.getHistory();
         // an Array is returned to allow the difficulty selection to be mutable
-        // the new Integer[0] helps the JComboBox constructor to choose the right array type
+        // the new Integer[0] helps the JList constructor to choose the right array type
         JList<Integer> list = new JList<>(history.toArray(new Integer[0]));
         // this refers to the instance of the HangmanGUI Frame where JScrollPane creates a scrollable
         // view of the score history list and the message type is INFORMATION_MESSAGE
@@ -205,7 +205,7 @@ public class HangmanGUI extends JFrame {
     private void initGamePanel() {
         // the top area shows word, lives, and high score in a row
         // the GridLayout makes a simple grid of cells that are all the same size
-        JPanel top = new JPanel(new GridLayout(1,3));
+        JPanel top = new JPanel(new GridLayout(1,4));
         top.add(wordLabel);
         top.add(livesLabel);
         top.add(scoreLabel);
@@ -269,7 +269,15 @@ public class HangmanGUI extends JFrame {
     public void updateGameView(GameSession s) {
         wordLabel.setText("Word: " + s.getObfuscatedWord());
         livesLabel.setText("Lives: " + s.getRemainingGuesses());
-        guessedChars.setText("Guessed Letters: " + s.getGuessedChars());
+        // make a whitespace separated list of guessed letters
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.getGuessedChars()) {
+            sb.append(c).append(' ');
+        }
+        String letters = sb.toString().trim();
+
+        // use HTML in the text so that it will auto-wrap and not go off the screen
+        guessedChars.setText("<html><b>Guessed Letters:</b><br>" + letters + "</html>");
     }
 
     /**
