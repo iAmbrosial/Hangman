@@ -298,7 +298,7 @@ public class HangmanGUI extends JFrame {
         if (win) {
             msg = "You Win! Score: " + score;
         } else {
-            msg = "Game Over!";
+            msg = "Game Over! Your target word was:\n" + controller.getTargetWord();
         }
         Object[] options = {"Play Again","Main Menu"};
         // brings up a dialog panel with the options Play Again and Main Menu, where the options are default options

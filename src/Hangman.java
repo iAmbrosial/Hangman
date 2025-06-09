@@ -132,6 +132,10 @@ public class Hangman {
         return currentPlayer.getScoreHistory();
     }
 
+    public String getTargetWord() {
+        return session.getTargetWord();
+    }
+
     /**
      * things to add: overall leaderboard between players, showing the word when the game is failed,
      * different word categories/difficulty algorithm, changing username/password

@@ -68,6 +68,10 @@ public class GameSession {
         return sb.toString().trim();
     }
 
+    public String getTargetWord() {
+        return this.targetWord;
+    }
+
     public int getWrongGuesses() {
         return this.wrongGuesses;
     }
