@@ -3,10 +3,12 @@ import java.util.Set;
 
 public class GameSession {
     private final String targetWord;
+    // stores unique elements in a HashSet and prevents nonunique elements from being added
     private final Set<Character> guessedChar = new HashSet<>();
     private int wrongGuesses = 0;
     private static final int MAX_GUESSES = 6;
 
+    // game session and the word chosen
     public GameSession(String targetWord) {
         if (targetWord == null || targetWord.isBlank()) {
             throw new IllegalArgumentException("Word cannot be null or blank.");

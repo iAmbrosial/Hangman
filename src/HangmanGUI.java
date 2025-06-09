@@ -39,7 +39,7 @@ public class HangmanGUI extends JFrame {
     private String currentDifficulty;
 
     /**
-     * Constructor: sets up the JFrame and initializes all child panels.
+     * Constructor: sets up the JFrame and initializes all other panels.
      */
     public HangmanGUI() {
         super("Hangman Game");  // set window title
@@ -63,7 +63,7 @@ public class HangmanGUI extends JFrame {
     }
 
     /**
-     * Setter for controller reference.
+     * Setter for controller reference. Makes up the interaction section of the JFrame.
      */
     public void setController(Hangman c) { controller = c; }
 

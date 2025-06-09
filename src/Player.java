@@ -14,6 +14,7 @@ public class Player implements Serializable {
     private String username;
     private String password;
     private int overallHighScore;
+    // saves a high score corresponding to the difficulty
     private final Map<String, Integer> highScoreMap = new HashMap<>();
     private final List<Integer> scoreHistory = new ArrayList<>();
 
@@ -44,6 +45,7 @@ public class Player implements Serializable {
         return this.username;
     }
 
+    // currently unused due to GUI taking a while
     public void setUsername(String newUsername) {
         if (newUsername == null || newUsername.isBlank()) {
             throw new IllegalArgumentException("New username cannot be blank.");
@@ -55,6 +57,7 @@ public class Player implements Serializable {
         return this.password;
     }
 
+    // currently unused due to GUI taking a while
     public void setPassword(String newPassword) {
         if (newPassword == null || newPassword.isBlank()) {
             throw new IllegalArgumentException("New password cannot be blank.");
@@ -81,12 +84,13 @@ public class Player implements Serializable {
     public void recordScore(String difficulty, int score) {
         // Add raw score to history
         this.scoreHistory.add(score);
-        // Update high score for the difficulty specified
+        // Update high score for the difficulty specified by taking the maximum value
         this.highScoreMap.merge(difficulty, score, Math::max);
-        // Update overall high score
+        // Update overall high score if applicable
         this.overallHighScore = Math.max(overallHighScore, score);
     }
 
+    // returns the value of the entry in the HashMap corresponding to the key, and if it does not exist returns the default value
     public int getHighScore(String difficulty) {
         return this.highScoreMap.getOrDefault(difficulty, 0);
     }
@@ -99,6 +103,7 @@ public class Player implements Serializable {
         return Collections.unmodifiableList(scoreHistory);
     }
 
+    // currently unused due to GUI taking a while
     /**
      * Output/format player info
      */
