@@ -76,6 +76,10 @@ public class GameSession {
         return MAX_GUESSES - this.wrongGuesses;
     }
 
+    public HashSet<Character> getGuessedChars() {
+        return new HashSet<>(this.guessedChar);
+    }
+
     public boolean hasGuessed(char c) {
         return guessedChar.contains(Character.toUpperCase(c));
     }

@@ -115,7 +115,9 @@ public class Hangman {
             // records the score for the specified difficulty
             currentPlayer.recordScore(diff, score);
             DataStore.savePlayers((ArrayList<Player>)players);
-            view.showEndOptions(state==1, score);
+            // state == 1 is equivalent to a boolean where true represents a win and false is a loss
+            // this changes whether "You Win!" or "Game Over" shows up in the end options menu
+            view.showEndOptions(state == 1, score);
         }
     }
 
@@ -128,5 +130,7 @@ public class Hangman {
     }
 
     // list of past scores of the player
-    public List<Integer> getHistory() { return currentPlayer.getScoreHistory(); }
+    public List<Integer> getHistory() {
+        return currentPlayer.getScoreHistory();
+    }
 }
